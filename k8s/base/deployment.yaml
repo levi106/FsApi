@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fs-api
+  labels:
+    app: fs-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fs-api
+  template:
+    metadata:
+      labels:
+        app: fs-api
+    spec:
+      containers:
+      - name: fs-api
+        image: ghcr.io/levi106/fs-api:main
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
